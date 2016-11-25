@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <!-- 声明文档使用的字符编码 -->
+<meta charset="utf-8">
+<!-- 优先使用 IE 最新版本和 Chrome -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+<!-- 页面描述 -->
+<meta name="description" content="pos贷有奖推荐"/>
+<!-- 页面关键词 -->
+<meta name="keywords" content="pos贷，推荐，银利普惠，有奖推荐"/>
+<!-- 网页作者 -->
+<meta name="author" content="Deng, dzwzs@sina.cn"/>
+<!-- 搜索引擎抓取 -->
+<meta name="robots" content="index,follow"/>
+<!-- 为移动设备添加 viewport -->
+<meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+<!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+<link href="css/style.css" rel="stylesheet" type="text/css">
+<title>有奖推荐——银利普惠，注册就送现金红包。</title>
+</head>
+<body>
+	<div class="page-main">
+	<header class="bg">
+    	<img src="images/page.png">
+    </header>
+	<section class="bg active-content">
+    	<h3 class="active-title" title="POS 商易贷，商户资金周转快。">
+        	<img src="images/title.png">
+        </h3>
+        <ul class="active-product">
+        	<li>
+            	<h4>选择<strong>多</strong></h4>
+                <p><img src="images/icon1.png"></p>
+                <p>期限灵活额度高达100万</p>
+            </li>
+            <li>
+            	<h4>速度<strong>快</strong></h4>
+                <p><img src="images/icon2.png"></p>
+                <p>在线签约最快3分钟放款</p>
+            </li>
+            <li>
+            	<h4>体验<strong>好</strong></h4>
+                <p><img src="images/icon3.png"></p>
+                <p>纯信用/无抵押POS流水为依据</p>
+            </li>
+            <li>
+            	<h4>费用<strong>省</strong></h4>
+                <p><img src="images/icon4.png"></p>
+                <p>每万元利息低至3.3元/日</p>
+            </li>
+        </ul>
+    </section>
+    
+    <section  class="bg active-content">
+    	<h3>刮奖活动</h3>
+        
+        <div  class="scratch" id="wScratchPad3">
+        	<p>恭喜你中奖了</p>
+        </div>
+
+    </section>
+    
+    <section  class="bg active-content">
+    	<h3>转盘抽奖</h3>
+        
+        <div class="ly-plate">
+            <div class="rotate-bg"></div>
+            <div class="lottery-star"><img src="images/rotate-static.png" id="lotteryBtn"></div>
+        </div>
+
+    </section>
+    
+    <section  class="bg active-content">
+    	<fieldset class="rule-line">
+        	 <legend class="rule-title"><img src="images/rule.png"/>活动规则</legend>
+            <ol class="rule-list">
+                <li>中奖名单将于活动页面公布。</li>
+                <li>开奖当天，系统自动发私信给获奖者告知中奖，提醒在腾讯微博上的注册QQ帐户领取Q币。</li>
+                <li>实物奖中奖者需连同微博用户名发邮件至weibom@qq.com 告知真实姓名，身份证扫描件，手机号及接收快递的地址和邮编。</li>
+                <li>中奖者若七日内无法取得联系或无法领奖，视为自动放弃</li>
+            </ol>
+        </fieldset>
+    </section>
+    <p class="foot">©2002-2015 银利普惠版权所有</p>
+    <footer class=" bg active-footer">
+    	<a class="btn"  href="activityDetail.html">我要推荐</a>
+    </footer>
+</div>
+</body>
+</html>
+<div class="layer">
+  	<div class="layer-content">
+        <header>
+        	<p>召唤你的好友，一起注册吧</p>
+           <img src="images/share.png">
+        </header>
+        <div class="card">
+            <div class="head">
+                <a><img src="images/header.png"></a>        	
+                <p>林小可</p>
+            </div>
+            <div class="code">
+                <a><img src="images/code.png"></a>        	
+                <p>识别图中的二维码，邀你加入银利普惠</p>
+            </div>
+        </div>
+      </div>
+  </div>
+<!--加载js文件 -->
+<script src="js/jquery.min.js"></script>
+<script src="js/wScratchPad.js"></script>
+<script src="js/jquery.rotate.js"></script>
+<script src="js/jquery.easing.min.js"></script>
+<script>
+//推荐活动
+$("#recommend").click(function(){
+	$(".layer").addClass("open");
+	$(".bg").addClass("blur");
+});
+$(".layer").click(function(e){
+	$(".layer").removeClass("open");
+	$(".bg").removeClass("blur");
+});
+
+//刮刮乐
+$("#wScratchPad3").wScratchPad({
+	cursor:'./cursors/mario.png',
+	scratchMove: function(e, percent)
+	{
+		if(percent > 60)
+		this.clear();
+	},
+});
+
+
+$(function() {
+
+	var timeOut = function(){  //超时函数
+		$("#lotteryBtn").rotate({
+			angle:0, 
+			duration: 10000, 
+			animateTo: 1800, //这里是设置请求超时后返回的角度，所以应该还是回到最原始的位置，2160是因为我要让它转6圈，就是360*5得来的
+			callback:function(){
+				alert('网络超时')
+			}
+		}); 
+	}; 
+	var rotateFunc = function(awards,angle,text){  //awards:奖项，angle:奖项对应的角度
+		$('#lotteryBtn').stopRotate();
+		$("#lotteryBtn").rotate({
+			angle:0, 
+			duration: 5000, 
+			animateTo: angle+1440, //angle是图片上各奖项对应的角度，1440是我要让指针旋转4圈。所以最后的结束的角度就是这样子^^
+			callback:function(){
+				alert(text)
+			}
+		}); 
+	};
+	
+	$("#lotteryBtn").rotate({ 
+	   bind: 
+		 { 
+			click: function(){
+				var time = [0,1];
+					time = time[Math.floor(Math.random()*time.length)];
+				if(time==0){
+					timeOut(); //网络超时
+				}
+				if(time==1){
+					var data = [1,2,3,0]; //返回的数组
+						data = data[Math.floor(Math.random()*data.length)];
+					if(data==1){
+						rotateFunc(1,157,'恭喜您抽中的一等奖')
+					}
+					if(data==2){
+						rotateFunc(2,247,'恭喜您抽中的二等奖')
+					}
+					if(data==3){
+						rotateFunc(3,22,'恭喜您抽中的三等奖')
+					}
+					if(data==0){
+						var angle = [67,112,202,292,337];
+							angle = angle[Math.floor(Math.random()*angle.length)]
+						rotateFunc(0,angle,'很遗憾，这次您未抽中奖')
+					}
+				}
+			}
+		 } 
+	});
+});
+</script>
