@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>2048  第1天</title>
+  <style type="text/css">
+    div{
+      width:120px;
+      height:120px;
+      background-color: red;
+    }
+  </style>
+ </head>
+ <body>
+  <div id="box" style="opacity:1;"></div>
+<script>
+   //1:div添加点击事件
+   var box = document.getElementById("box");
+  
+   var opacity =parseInt(box.style.opacity);
+   var opacity=i, i=1;
+	  
+   box.onmouseover = function(){
+      var tid = setInterval(function(){	  
+      	i = i-0.1;
+	  if(i <= 0){
+        clearInterval(tid); 
+      }
+      box.style.opacity = opacity;
+
+      //最后一行仃定
+      
+     },1000); 
+   };
+   box.onmouseout = function(){
+      var tid = setInterval(function(){		
+			i = i + 0.1;
+			if(i>1){
+				clearInterval(tid); 
+			} 
+			box.style.opacity = opacity; 
+	  },1000);
+   }
+</script>
+ 
+ </body>
+ </html>
